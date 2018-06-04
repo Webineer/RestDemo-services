@@ -6,15 +6,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SweepStatus {
 	
 	private String sweepName;
+	private String linkUrl;
 	private boolean errorStatus;
 	
 	//default constructor
-	public SweepStatus() {
-		
+	public SweepStatus() {		
 	}
 	
-	public SweepStatus(String sweepName, boolean errorStatus) {
+	public SweepStatus(String sweepName, String linkUrl, boolean errorStatus) {
 		this.setSweepName(sweepName);
+		this.setLinkUrl(linkUrl);
 		this.setErrorStatus(errorStatus);
 	}
 	
@@ -25,6 +26,14 @@ public class SweepStatus {
 	
 	public void setSweepName(String sweepName) {
 		this.sweepName = sweepName;
+	}
+
+	public String getLinkUrl() {
+		return linkUrl;
+	}
+
+	public void setLinkUrl(String linkUrl) {
+		this.linkUrl = linkUrl;
 	}
 
 	public boolean isErrorStatus() {
