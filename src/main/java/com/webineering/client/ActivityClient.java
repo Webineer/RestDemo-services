@@ -20,6 +20,11 @@ public class ActivityClient {
 		client = ClientBuilder.newClient();
 	}
 
+	public Response getMyResource() {
+		final WebTarget target = client.target("http://localhost:8080/restdemo-services");
+		final Response response = target.path("webapi").path("myresource").request(MediaType.TEXT_PLAIN).get(Response.class);
+		return response;
+	}
 	public Response get(final String id) {
 
 		final WebTarget target = client.target("http://localhost:8080/restdemo-services/webapi/");

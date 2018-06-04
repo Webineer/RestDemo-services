@@ -14,6 +14,17 @@ import com.webineering.model.ActivitySearch;
 import com.webineering.model.ActivitySearchType;
 
 public class ActivityClientTest {
+	
+	@Test
+	public void testGetMyResource() {
+		final ActivityClient client = new ActivityClient();
+
+		final Response activity = client.getMyResource();
+
+		System.out.println(activity);
+
+		assertNotNull(activity);
+	}
 
 	@Test
 	public void testGet() {
