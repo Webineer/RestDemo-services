@@ -2,10 +2,16 @@ package com.webineering.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 import com.webineering.model.SweepStatus;
 
@@ -13,6 +19,11 @@ public class SweepStatusService implements ISweepStatusService {
 	
 	//ResourceBundle rb = ResourceBundle.getBundle("restdemo");
 
+/**
+ * This method reads a sweep file and determines if there are any comparisons that have differences
+ * param file - sweep text file
+ * return - the sweep status object; a summary of the sweep name, sweep file url, and the status of the file
+ */
 	@Override
 	public SweepStatus readTextFile(File file) {
 		System.out.println("the name is " + file.getName());
@@ -33,20 +44,6 @@ public class SweepStatusService implements ISweepStatusService {
 		//System.out.println("the directory is " + rb.getString("digestDirectory"));
 		
 		SweepStatus theStatus = new SweepStatus(fileName, link, true);
-		//theStatus.setSweepName(fileName);
-		
-		//String[] tempNameArray = (file.getName()).split("\\.");
-		//if (tempNameArray.length > 0) {
-		//	theStatus.setSweepName(tempNameArray[0]);
-		//	System.out.println("the sweep name is " + tempNameArray[0]);
-		//} else {
-		//	theStatus.setSweepName("testName");
-		//	System.out.println("the sweep name is testName");
-		//}
-		
-		//HttpServletRequest request.getServerName();   // Returns: localhost
-		//request.getServerPort();   // Returns: 8080
-		//request.getContextPath();  // Returns: /MyApp
 		
         // Prepare a Scanner that will "scan" the document
         Scanner opnScanner;
@@ -57,14 +54,6 @@ public class SweepStatusService implements ISweepStatusService {
 	        while( opnScanner.hasNext() ) {
 	            // Read each line and display its value
 	        	String myString = opnScanner.nextLine();
-	        	
-	        	//System.out.println("the content is " + myString);
-	        	
-	        	/*if(myString.equals("This is a test")) {
-		        	theStatus.setErrorStatus(true);
-	        	} else {
-	        		theStatus.setErrorStatus(false);
-	        	}*/
 	        	
 	        	//current day records prod
 	        	if (myString.contains("Total number of current day records in the production file")) {
@@ -133,7 +122,20 @@ public class SweepStatusService implements ISweepStatusService {
 		return theStatus;
 		
 	}
+	
+	public ArrayList<SweepStatus> readTextFiles() {
+		ArrayList<SweepStatus> sweepStatusResults = new ArrayList<SweepStatus>();
+		File[] fileList = ;
 		
+		
+		return sweepStatusResults;
+	}
+	
+	/**
+	 * This method used to strip the file extension off of the file name
+	 * @param str
+	 * @return
+	 */
 	public String stripExtension(String str) {
 
 	   if (str == null) return null;
@@ -147,5 +149,14 @@ public class SweepStatusService implements ISweepStatusService {
 	   // Otherwise return the string, up to the dot.
        return str.substring(0, pos);
    }
+	
+	public File[] getListOfAllTxtFiles(String directoryName) {
+	    //File directory = new File(directoryName);
+	    //return FileUtils.listFiles(directory, new WildcardFileFilter("*.txt"), null);
+		
+		File dir = new File(directoryName);
+		File[] files = dir.listFiles((d, name) -> name.endsWith(".txt"));
+		return files;
+	}
 	
 }
