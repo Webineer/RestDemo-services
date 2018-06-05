@@ -1,19 +1,14 @@
 package com.webineering.resources;
 
-import static org.junit.Assert.*;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import org.eclipse.persistence.oxm.MediaType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.webineering.SweepStatusResource;
 
 public class SweepStatusResourceTest {
 

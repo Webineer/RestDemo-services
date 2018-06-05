@@ -7,12 +7,14 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.webineering.model.Activity;
 import com.webineering.model.ActivitySearch;
 import com.webineering.model.ActivitySearchType;
 
+@Ignore
 public class ActivityClientTest {
 	
 	@Test

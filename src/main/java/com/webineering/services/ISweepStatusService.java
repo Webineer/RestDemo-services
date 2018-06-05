@@ -10,6 +10,6 @@ public interface ISweepStatusService {
 	
 	public SweepStatus readTextFile(File file);
 	
-	public ArrayList<SweepStatus> readTextFiles();
+	public ArrayList<SweepStatus> readTextFiles(String[] directoryNames);
 
 }

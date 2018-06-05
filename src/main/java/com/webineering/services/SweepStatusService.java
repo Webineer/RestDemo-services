@@ -123,11 +123,19 @@ public class SweepStatusService implements ISweepStatusService {
 		
 	}
 	
-	public ArrayList<SweepStatus> readTextFiles() {
+	public ArrayList<SweepStatus> readTextFiles(String[] directoryList) {
 		ArrayList<SweepStatus> sweepStatusResults = new ArrayList<SweepStatus>();
-		File[] fileList = ;
+		//String directoryName = "C:\\Users\\gscarfo\\Desktop";
 		
+			for(String directoryName : directoryList) {
+			File[] fileList = this.getListOfAllTxtFiles(directoryName);
 		
+			for(File myFile : fileList) {
+				sweepStatusResults.add(this.readTextFile(myFile));
+			}
+			System.out.println("the size of the result set is " + Integer.toString(sweepStatusResults.size()));	
+			this.printSweepStatus(sweepStatusResults);
+		}
 		return sweepStatusResults;
 	}
 	
@@ -151,12 +159,21 @@ public class SweepStatusService implements ISweepStatusService {
    }
 	
 	public File[] getListOfAllTxtFiles(String directoryName) {
-	    //File directory = new File(directoryName);
-	    //return FileUtils.listFiles(directory, new WildcardFileFilter("*.txt"), null);
 		
 		File dir = new File(directoryName);
 		File[] files = dir.listFiles((d, name) -> name.endsWith(".txt"));
 		return files;
+	}
+	
+	public void printSweepStatus(ArrayList<SweepStatus> results) {
+		for (SweepStatus ss : results) {
+			System.out.println(ss.getSweepName() + " " + ss.getLinkUrl());
+			if (ss.isErrorStatus()) {
+				System.out.print("good\n\n");
+			} else {
+				System.out.println("bad\n\n");
+			}
+		}
 	}
 	
 }
